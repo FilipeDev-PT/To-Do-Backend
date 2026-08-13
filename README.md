@@ -4,20 +4,27 @@ Backend estilo Trello enxuto: **boards → lists → cards**, com monólito modu
 
 Sem auth, membros, comments, labels ou WebSocket.
 
-## Setup
+## Documentação
+
+| Doc | Conteúdo |
+|---|---|
+| [`docs/uso.md`](./docs/uso.md) | Instalação, scripts, contrato da API, erros, deploy |
+| [`docs/tecnica.md`](./docs/tecnica.md) | Arquitetura, domínio, DI, persistência, testes |
+| [`docs/estrutura.md`](./docs/estrutura.md) | Mapa pasta/arquivo |
+
+## Setup rápido
 
 ```bash
 cd To-Do-Backend
 npm install
-cp .env.example .env   # se ainda não tiver .env
-# edite DATABASE_URL
-npm run db:create   # roda create-table.js (boards, lists, cards)
+cp .env.example .env   # edite DATABASE_URL
+npm run db:create
 npm run dev
 ```
 
-API em `http://localhost:3334` (porta padrão).
+API em `http://localhost:3334` · QA: `https://to-do-backend-c6t5.onrender.com`
 
-## Endpoints
+## Endpoints (resumo)
 
 | Método | Path | Ação |
 |---|---|---|
@@ -35,11 +42,9 @@ API em `http://localhost:3334` (porta padrão).
 | DELETE | `/cards/:cardId` | apagar card |
 | POST | `/cards/:cardId/move` | mover card `{ listId, position }` |
 
-Use [`routes.http`](./routes.http) para smoke tests manuais.
+Smoke: [`routes.http`](./routes.http). Detalhes e exemplos: [`docs/uso.md`](./docs/uso.md).
 
 ## Testes
-
-Stack: **Vitest** + Fastify `inject()` (regressão HTTP) + repositório in-memory.
 
 ```bash
 npm run test
@@ -48,18 +53,11 @@ npm run test:coverage
 ```
 
 - Unitários: domain, use cases, schemas Zod, errors, event-bus
-- Regressão HTTP: contrato das rotas via `app.inject()` (sem porta/rede)
-- Integração Postgres/Neon: roda **somente** se `DATABASE_URL` estiver definido (ex.: via `.env`)
+- Regressão HTTP: `app.inject()` (sem porta/rede)
+- Integração Neon: só com `DATABASE_URL` definido
 
-```bash
-# com .env contendo DATABASE_URL, a suíte de repository também executa
-npm run test
-```
-
-## Arquitetura
-
-Veja o mapa completo em [`docs/estrutura.md`](./docs/estrutura.md).
-
-Resumo do fluxo:
+## Arquitetura (resumo)
 
 `HTTP → routes → schemas (Zod) → controller → use case → domain → repository (Postgres)`
+
+Detalhes em [`docs/tecnica.md`](./docs/tecnica.md).

@@ -13,6 +13,8 @@ to-do/
 ├── routes.http
 ├── create-table.js
 ├── docs/
+│   ├── uso.md
+│   ├── tecnica.md
 │   └── estrutura.md
 └── src/
     ├── server.js
@@ -70,6 +72,8 @@ Pasta do backend isolado (não mistura com o CRUD de videos em `04 - Node`).
 | `routes.http` | Requests HTTP de exemplo para smoke test manual. |
 | `create-table.js` | Cria tabelas `boards`, `lists`, `cards` com FKs, `position` e cascade (`npm run db:create`). |
 | `docs/` | Documentação do projeto. |
+| `docs/uso.md` | Guia de uso / API. |
+| `docs/tecnica.md` | Arquitetura e decisões técnicas. |
 | `docs/estrutura.md` | Este mapa. |
 | `src/` | Código da aplicação em runtime. |
 
