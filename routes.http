@@ -1,0 +1,86 @@
+@baseUrl = http://localhost:3334
+
+### Health
+GET {{baseUrl}}/healthz
+
+### Create board
+POST {{baseUrl}}/boards
+Content-Type: application/json
+
+{
+  "title": "Meu Board"
+}
+
+### List boards
+GET {{baseUrl}}/boards
+
+### Get board (replace BOARD_ID)
+GET {{baseUrl}}/boards/BOARD_ID
+
+### Update board
+PATCH {{baseUrl}}/boards/BOARD_ID
+Content-Type: application/json
+
+{
+  "title": "Board atualizado"
+}
+
+### Create list
+POST {{baseUrl}}/boards/BOARD_ID/lists
+Content-Type: application/json
+
+{
+  "title": "A fazer"
+}
+
+### Create second list
+POST {{baseUrl}}/boards/BOARD_ID/lists
+Content-Type: application/json
+
+{
+  "title": "Feito"
+}
+
+### Update list
+PATCH {{baseUrl}}/lists/LIST_ID
+Content-Type: application/json
+
+{
+  "title": "Em progresso"
+}
+
+### Create card
+POST {{baseUrl}}/lists/LIST_ID/cards
+Content-Type: application/json
+
+{
+  "title": "Estudar arquitetura",
+  "description": "Monólito modular em Node"
+}
+
+### Update card
+PATCH {{baseUrl}}/cards/CARD_ID
+Content-Type: application/json
+
+{
+  "title": "Estudar arquitetura Node",
+  "description": "Boards / lists / cards"
+}
+
+### Move card
+POST {{baseUrl}}/cards/CARD_ID/move
+Content-Type: application/json
+
+{
+  "listId": "TARGET_LIST_ID",
+  "position": 0
+}
+
+### Delete card
+DELETE {{baseUrl}}/cards/CARD_ID
+
+### Delete list
+DELETE {{baseUrl}}/lists/LIST_ID
+
+### Delete board
+DELETE {{baseUrl}}/boards/BOARD_ID
